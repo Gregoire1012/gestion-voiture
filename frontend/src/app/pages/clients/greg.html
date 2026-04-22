@@ -1,0 +1,39 @@
+<h2>👤 Liste des clients</h2>
+
+<table border="1" width="100%">
+  <tr>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Téléphone</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+
+  <tr *ngFor="let c of clients">
+    <td>{{ c.idClient }}</td>
+    <td>{{ c.nom }}</td>
+    <td>{{ c.prenom }}</td>
+    <td>{{ c.telephone }}</td>
+    <td>{{ c.email }}</td>
+
+    <td>
+      <button (click)="edit(c)">Modifier</button>
+      <button (click)="delete(c.idClient)">Supprimer</button>
+    </td>
+  </tr>
+</table>
+
+<hr>
+
+<h3>Formulaire</h3>
+
+<input [(ngModel)]="client.nom" placeholder="Nom"><br>
+<input [(ngModel)]="client.prenom" placeholder="Prénom"><br>
+<input [(ngModel)]="client.telephone" placeholder="Téléphone"><br>
+<input [(ngModel)]="client.email" placeholder="Email"><br>
+
+<button (click)="save()">
+  {{ editMode ? 'Modifier' : 'Ajouter' }}
+</button>
+<button *ngIf="editMode" (click)="reset()">Annuler</button>

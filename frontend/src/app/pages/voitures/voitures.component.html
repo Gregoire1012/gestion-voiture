@@ -1,0 +1,87 @@
+<div class="container">
+
+  <div class="card">
+
+    <div class="header">
+      <h2>🚗 Gestion des voitures</h2>
+      <p>CRUD complet : Ajouter • Modifier • Supprimer</p>
+    </div>
+
+    <!-- ================= FORM ================= -->
+    <div class="form">
+
+      <input [(ngModel)]="voiture.matricule" placeholder="Matricule">
+      <input [(ngModel)]="voiture.marque" placeholder="Marque">
+      <input [(ngModel)]="voiture.couleur" placeholder="Couleur">
+      <input [(ngModel)]="voiture.type" placeholder="Type">
+      <input [(ngModel)]="voiture.prix" type="number" placeholder="Prix">
+      <input [(ngModel)]="voiture.image" placeholder="Image URL">
+
+      <button class="btn-primary" (click)="saveVoiture()">
+        {{ editMode ? '✏️ Modifier' : '➕ Ajouter' }}
+      </button>
+
+      <button *ngIf="editMode" class="btn-cancel" (click)="reset()">
+        ❌ Annuler
+      </button>
+
+    </div>
+
+    <!-- ================= TABLE ================= -->
+    <div class="table-container">
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>Matricule</th>
+            <th>Marque</th>
+            <th>Couleur</th>
+            <th>Type</th>
+            <th>Prix</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let v of voitures">
+
+            <td>{{ v.idVoiture }}</td>
+
+            <td>
+              <img [src]="v.image" width="60" height="40">
+            </td>
+
+            <td>{{ v.matricule }}</td>
+            <td>{{ v.marque }}</td>
+            <td>{{ v.couleur }}</td>
+            <td>
+              <span class="badge">{{ v.type }}</span>
+            </td>
+            <td>{{ v.prix }} Ar</td>
+
+            <td>
+
+              <button class="btn-edit" (click)="editVoiture(v)">
+                ✏️
+              </button>
+
+              <button class="btn-delete" (click)="deleteVoiture(v.idVoiture)">
+                🗑️
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

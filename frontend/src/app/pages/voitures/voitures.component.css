@@ -1,0 +1,152 @@
+/* GLOBAL */
+body {
+  background: #f4f7fb;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  padding: 30px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.header h2 {
+  margin: 0;
+}
+
+.header p {
+  color: gray;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.form input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.form input:focus {
+  border-color: #0ea5e9;
+  outline: none;
+  box-shadow: 0 0 5px rgba(14,165,233,0.3);
+}
+
+/* BUTTON */
+.btn-primary {
+  grid-column: span 2;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* TABLE */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #0ea5e9;
+  color: white;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+}
+
+tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: 0.2s;
+}
+
+tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* IMAGE */
+.car-img {
+  width: 70px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* TEXT STYLE */
+.bold {
+  font-weight: bold;
+}
+
+.price {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+/* BADGE */
+.badge {
+  background: #e0f2fe;
+  color: #0284c7;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* ACTION BUTTONS */
+.btn-edit {
+  background: orange;
+  border: none;
+  padding: 8px 12px;
+  margin-right: 5px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-edit:hover {
+  background: #fb923c;
+}
+
+.btn-delete {
+  background: red;
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}

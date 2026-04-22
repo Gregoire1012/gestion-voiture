@@ -1,0 +1,86 @@
+<div class="container">
+
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h2>👤 Gestion des clients</h2>
+      <p>CRUD complet : Ajouter • Modifier • Supprimer</p>
+    </div>
+
+    <!-- FORM -->
+    <div class="form">
+
+      <!-- ❌ pas besoin ID en input (auto DB) -->
+      <input [(ngModel)]="client.nom" placeholder="Nom">
+      <input [(ngModel)]="client.prenom" placeholder="Prénom">
+      <input [(ngModel)]="client.telephone" placeholder="Téléphone">
+      <input [(ngModel)]="client.email" placeholder="Email">
+
+      <button class="btn-primary" (click)="save()">
+        {{ editMode ? '✏️ Modifier client' : '➕ Ajouter client' }}
+      </button>
+
+      <button *ngIf="editMode" class="btn-cancel" (click)="reset()">
+        ❌ Annuler
+      </button>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Téléphone</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <!-- IMPORTANT: idClient (Pas idclient) -->
+          <tr *ngFor="let c of clients">
+
+            <td>{{ c.idClient }}</td>
+
+            <td class="bold">{{ c.nom }}</td>
+
+            <td>{{ c.prenom }}</td>
+
+            <td>
+              <span class="badge phone">{{ c.telephone }}</span>
+            </td>
+
+            <td class="email">{{ c.email }}</td>
+
+            <td>
+
+              <button class="btn-edit" (click)="edit(c)">
+                ✏️
+              </button>
+
+              <!-- IMPORTANT: delete by ID -->
+              <button class="btn-delete" (click)="delete(c.idClient)">
+                🗑️
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

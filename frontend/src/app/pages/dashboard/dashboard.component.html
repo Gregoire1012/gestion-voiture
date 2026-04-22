@@ -1,0 +1,47 @@
+<div class="container">
+
+  <h2>📊 Dashboard</h2>
+
+  <div class="cards">
+
+    <div class="card blue">
+      <h3>🚗 Voitures</h3>
+      <p>{{ voitures }}</p>
+    </div>
+
+    <div class="card green">
+      <h3>👤 Clients</h3>
+      <p>{{ clients }}</p>
+    </div>
+
+    <div class="card orange">
+      <h3>💰 Ventes</h3>
+      <p>{{ ventes }}</p>
+    </div>
+
+    <div class="card red">
+      <h3>💵 Total</h3>
+      <p>{{ totalVentes }} Ar</p>
+    </div>
+
+  </div>
+
+  <!-- 📊 GRAPH SIMPLE -->
+  <div class="graph">
+    <h3>📈 Statistiques</h3>
+
+    <div class="bar-container">
+      <div class="bar voitures" [style.height.%]="voitures * 5"></div>
+      <div class="bar clients" [style.height.%]="clients * 5"></div>
+      <div class="bar ventes" [style.height.%]="ventes * 5"></div>
+    </div>
+
+    <div class="labels">
+      <span>Voitures</span>
+      <span>Clients</span>
+      <span>Ventes</span>
+    </div>
+
+  </div>
+
+</div>
