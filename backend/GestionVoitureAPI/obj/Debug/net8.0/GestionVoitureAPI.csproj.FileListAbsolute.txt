@@ -19,8 +19,8 @@
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/Microsoft.OpenApi.dll
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/Mono.TextTemplating.dll
-/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/Npgsql.dll
-/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/MySqlConnector.dll
+/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.dll
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -89,6 +89,7 @@
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/GestionVoitureAPI.csproj.CoreCompileInputs.cache
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/GestionVoitureAPI.MvcApplicationPartsAssemblyInfo.cs
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/GestionVoitureAPI.MvcApplicationPartsAssemblyInfo.cache
+/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/GestionVoitureAPI.sourcelink.json
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/staticwebassets.build.json
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/staticwebassets.development.json
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/staticwebassets/msbuild.GestionVoitureAPI.Microsoft.AspNetCore.StaticWebAssets.props
@@ -103,3 +104,4 @@
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/GestionVoitureAPI.pdb
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/GestionVoitureAPI.genruntimeconfig.cache
 /home/gregoire/gestion-voiture/backend/GestionVoitureAPI/obj/Debug/net8.0/ref/GestionVoitureAPI.dll
+/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/bin/Debug/net8.0/GestionVoitureAPI.staticwebassets.runtime.json

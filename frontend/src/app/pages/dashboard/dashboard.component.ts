@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +10,30 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-  // 📊 données simulées (plus tard API)
-  voitures = 12;
-  clients = 8;
-  ventes = 5;
+  voituresCount = 0;
+  clientsCount = 0;
+  ventesCount = 0;
+  totalVentes = 0;
 
-  totalVentes = 125000;
+  constructor(private api: ApiService) {}
 
+  ngOnInit(): void {
+    this.loadDashboard();
+  }
+
+  loadDashboard(): void {
+    this.api.getDashboard().subscribe({
+      next: (data) => {
+        this.voituresCount = data.voitures;
+        this.clientsCount = data.clients;
+        this.ventesCount = data.ventes;
+        this.totalVentes = data.total;
+      },
+      error: (err) => {
+        console.log("Dashboard error:", err);
+      }
+    });
+  }
 }

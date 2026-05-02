@@ -2,35 +2,64 @@
 
   <div class="card">
 
+    <!-- ================= HEADER ================= -->
     <div class="header">
       <h2>🚗 Gestion des voitures</h2>
       <p>CRUD complet : Ajouter • Modifier • Supprimer</p>
     </div>
 
+    <!-- ================= ALERTS ================= -->
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="success">
+      {{ successMessage }}
+    </div>
+
     <!-- ================= FORM ================= -->
     <div class="form">
 
-      <input [(ngModel)]="voiture.matricule" placeholder="Matricule">
-      <input [(ngModel)]="voiture.marque" placeholder="Marque">
+      <input [(ngModel)]="voiture.matricule" placeholder="Matricule" required>
+      <input [(ngModel)]="voiture.marque" placeholder="Marque" required>
       <input [(ngModel)]="voiture.couleur" placeholder="Couleur">
       <input [(ngModel)]="voiture.type" placeholder="Type">
       <input [(ngModel)]="voiture.prix" type="number" placeholder="Prix">
-      <input [(ngModel)]="voiture.image" placeholder="Image URL">
 
-      <button class="btn-primary" (click)="saveVoiture()">
-        {{ editMode ? '✏️ Modifier' : '➕ Ajouter' }}
-      </button>
+      <input type="file" (change)="onFileSelected($event)">
 
-      <button *ngIf="editMode" class="btn-cancel" (click)="reset()">
-        ❌ Annuler
-      </button>
+      <!-- PREVIEW -->
+      <div *ngIf="selectedFile">
+        <p>📷 Aperçu :</p>
+        <img [src]="previewUrl" width="120" style="border-radius:8px;">
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="buttons">
+
+        <button class="btn-primary" (click)="saveVoiture()">
+          {{ editMode ? '✏️ Modifier' : '➕ Ajouter' }}
+        </button>
+
+        <button *ngIf="editMode" class="btn-cancel" (click)="reset()">
+          ❌ Annuler
+        </button>
+
+      </div>
 
     </div>
 
     <!-- ================= TABLE ================= -->
     <div class="table-container">
 
-      <table>
+      <!-- 🔥 LOADING -->
+      <div *ngIf="loading && voitures.length === 0" class="empty">
+        ⏳ Chargement des voitures...
+      </div>
+
+      <!-- 🔥 TABLE -->
+      <table *ngIf="!loading && voitures.length > 0">
+
         <thead>
           <tr>
             <th>ID</th>
@@ -51,27 +80,28 @@
             <td>{{ v.idVoiture }}</td>
 
             <td>
-              <img [src]="v.image" width="60" height="40">
+              <img
+                [src]="getImageUrl(v.image)"
+                width="70"
+                height="50"
+                style="object-fit: cover; border-radius: 6px;"
+                (error)="onImageError($event)"
+              />
             </td>
 
             <td>{{ v.matricule }}</td>
             <td>{{ v.marque }}</td>
             <td>{{ v.couleur }}</td>
+
             <td>
               <span class="badge">{{ v.type }}</span>
             </td>
-            <td>{{ v.prix }} Ar</td>
 
-            <td>
+            <td>{{ v.prix | number }} Ar</td>
 
-              <button class="btn-edit" (click)="editVoiture(v)">
-                ✏️
-              </button>
-
-              <button class="btn-delete" (click)="deleteVoiture(v.idVoiture)">
-                🗑️
-              </button>
-
+            <td class="actions">
+              <button class="btn-edit" (click)="editVoiture(v)">✏️</button>
+              <button class="btn-delete" (click)="deleteVoiture(v.idVoiture)">🗑️</button>
             </td>
 
           </tr>
@@ -79,6 +109,11 @@
         </tbody>
 
       </table>
+
+      <!-- EMPTY (CORRIGÉ) -->
+      <div *ngIf="!loading && voitures.length === 0" class="empty">
+        ❌ Aucune voiture trouvée
+      </div>
 
     </div>
 

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using GestionVoitureAPI.Data;
 using GestionVoitureAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestionVoitureAPI.Controllers
 {
@@ -15,49 +16,71 @@ namespace GestionVoitureAPI.Controllers
             _context = context;
         }
 
-        // GET
+        // ================= GET ALL =================
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(_context.Clients.ToList());
+            var clients = await _context.Clients.ToListAsync();
+            return Ok(clients);
         }
 
-        // POST
-[HttpPost]
-public IActionResult Create(Client c)
-{
-    _context.Clients.Add(c);
-    _context.SaveChanges();
-
-    return Ok(c);
-}
-
-        // PUT
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, Client c)
+        // ================= GET BY ID =================
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            var data = _context.Clients.Find(id);
-            if (data == null) return NotFound();
+            var client = await _context.Clients.FindAsync(id);
+
+            if (client == null)
+                return NotFound();
+
+            return Ok(client);
+        }
+
+        // ================= POST =================
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] Client c)
+        {
+            if (c == null)
+                return BadRequest();
+
+            _context.Clients.Add(c);
+            await _context.SaveChangesAsync();
+
+            return Ok(c);
+        }
+
+        // ================= PUT =================
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] Client c)
+        {
+            var data = await _context.Clients.FindAsync(id);
+
+            if (data == null)
+                return NotFound();
 
             data.Nom = c.Nom;
             data.Prenom = c.Prenom;
             data.Telephone = c.Telephone;
             data.Email = c.Email;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
             return Ok(data);
         }
 
-        // DELETE
+        // ================= DELETE =================
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var c = _context.Clients.Find(id);
-            if (c == null) return NotFound();
+            var c = await _context.Clients.FindAsync(id);
+
+            if (c == null)
+                return NotFound();
 
             _context.Clients.Remove(c);
-            _context.SaveChanges();
-            return Ok();
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

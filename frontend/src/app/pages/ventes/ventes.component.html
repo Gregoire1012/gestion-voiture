@@ -1,8 +1,13 @@
+
+<!-- MESSAGE -->
+<div *ngIf="message" class="message" [ngClass]="messageType">
+  {{ message }}
+</div>
+
 <div class="container">
 
   <div class="card">
 
-    <!-- HEADER -->
     <div class="header">
       <h2>💰 Gestion des ventes</h2>
       <p>Enregistrer et suivre les transactions</p>
@@ -11,29 +16,31 @@
     <!-- FORM -->
     <div class="form">
 
-      <input [(ngModel)]="vente.idvente" placeholder="ID Vente">
-
-      <input type="date" [(ngModel)]="vente.date_vente">
+      <!-- DATE -->
+      <input type="date" [(ngModel)]="vente.date_Vente">
 
       <!-- CLIENT -->
-      <select [(ngModel)]="vente.idclient">
-        <option [ngValue]="null">-- Choisir Client --</option>
-        <option *ngFor="let c of clients" [ngValue]="c.idclient">
-          {{ c.nom }}
-        </option>
-      </select>
+<select [(ngModel)]="vente.idClient">
+  <option [ngValue]="null">-- Choisir Client --</option>
 
-          <!-- VOITURE -->
-      <select [(ngModel)]="vente.idvoiture" (change)="calculerMontant()">
-        <option [ngValue]="null">-- Choisir Voiture --</option>
-        <option *ngFor="let v of voitures" [ngValue]="v.idvoiture">
-          {{ v.marque }} ({{ v.prix }} €)
-        </option>
-      </select>
+  <option *ngFor="let c of clients" [ngValue]="c.idClient">
+    {{ c.nom }} {{ c.prenom }}
+  </option>
+</select>
 
-      <!-- MONTANT AUTO -->
-      <input class="montant" [value]="vente.montant" readonly placeholder="Montant automatique">
+      <!-- VOITURE -->
+<select [(ngModel)]="vente.idVoiture" (change)="calculerMontant()">
+  <option [ngValue]="null">-- Choisir Voiture --</option>
 
+  <option *ngFor="let v of voitures" [ngValue]="v.idVoiture">
+    {{ v.marque }} ({{ v.prix }} Ar)
+  </option>
+</select>
+
+      <!-- MONTANT -->
+      <input class="montant" [value]="vente.montant" readonly>
+
+      <!-- BUTTON -->
       <button class="btn-primary" (click)="ajouter()">
         ➕ Enregistrer la vente
       </button>
@@ -43,7 +50,7 @@
     <!-- TABLE -->
     <div class="table-container">
 
-      <table>
+      <table *ngIf="ventes.length > 0; else noData">
 
         <thead>
           <tr>
@@ -52,59 +59,49 @@
             <th>Client</th>
             <th>Voiture</th>
             <th>Montant</th>
+            <th>Actions</th>
           </tr>
         </thead>
 
         <tbody>
+
           <tr *ngFor="let v of ventes">
 
-            <td>{{ v.idvente }}</td>
+            <td>{{ v.idVente }}</td>
 
-            <td class="date">
-              {{ v.date_vente }}
-            </td>
+            <td>{{ v.date_Vente }}</td>
 
-            <td class="bold">
-              {{ clients.find(c => c.idclient == v.idclient)?.nom }}
+            <td>
+              {{ clients.find(c => c.idClient === v.idClient)?.nom }}
             </td>
 
             <td>
-              <span class="badge">
-                {{ voitures.find(vo => vo.idvoiture == v.idvoiture)?.marque }}
-              </span>
+              {{ voitures.find(vo => vo.idVoiture === v.idVoiture)?.marque }}
             </td>
 
-            <td class="price">
-              {{ v.montant }} Ar
+            <td>{{ v.montant }} Ar</td>
+
+              <td>
+
+              <!-- 🔥 UNE SEULE MÉTHODE -->
+<button class="btn-delete" (click)="confirmDelete(v.idVente)">
+  🗑️
+</button>
+
             </td>
 
           </tr>
+
         </tbody>
 
       </table>
+
+      <ng-template #noData>
+        <div class="empty">❌ Aucune vente</div>
+      </ng-template>
 
     </div>
 
   </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

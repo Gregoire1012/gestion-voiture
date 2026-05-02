@@ -11,21 +11,18 @@ namespace GestionVoitureAPI.Data
         }
 
         // ================= TABLES =================
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Voiture> Voitures { get; set; }
-        public DbSet<Vente> Ventes { get; set; }
+        public DbSet<Client> Clients => Set<Client>();
+        public DbSet<Voiture> Voitures => Set<Voiture>();
+        public DbSet<Vente> Ventes => Set<Vente>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // ================= SCHEMA (IMPORTANT PRO) =================
-            modelBuilder.HasDefaultSchema("public");
-
             // ================= TABLE NAMES =================
-            modelBuilder.Entity<Client>().ToTable("Clients");
-            modelBuilder.Entity<Voiture>().ToTable("Voitures");
-            modelBuilder.Entity<Vente>().ToTable("Ventes");
+            modelBuilder.Entity<Client>().ToTable("client");
+            modelBuilder.Entity<Voiture>().ToTable("voiture");
+            modelBuilder.Entity<Vente>().ToTable("vente");
 
             // ================= PRIMARY KEYS =================
             modelBuilder.Entity<Client>()
@@ -40,14 +37,14 @@ namespace GestionVoitureAPI.Data
             // ================= RELATION CLIENT -> VENTES =================
             modelBuilder.Entity<Vente>()
                 .HasOne(v => v.Client)
-                .WithMany(c => c.Ventes) // ✔ mieux (relation propre)
+                .WithMany(c => c.Ventes)
                 .HasForeignKey(v => v.IdClient)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // ================= RELATION VOITURE -> VENTES =================
             modelBuilder.Entity<Vente>()
                 .HasOne(v => v.Voiture)
-                .WithMany(v => v.Ventes) // ✔ mieux aussi
+                .WithMany(vt => vt.Ventes)
                 .HasForeignKey(v => v.IdVoiture)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -55,6 +52,11 @@ namespace GestionVoitureAPI.Data
             modelBuilder.Entity<Vente>()
                 .Property(v => v.Montant)
                 .HasPrecision(18, 2);
+
+            // ================= OPTION MYSQL CLEAN =================
+modelBuilder.Entity<Client>().ToTable("client");
+modelBuilder.Entity<Voiture>().ToTable("voiture");
+modelBuilder.Entity<Vente>().ToTable("vente");
         }
     }
 }

@@ -20,7 +20,10 @@ namespace GestionVoitureAPI.Controllers
             var voitures = _context.Voitures.Count();
             var clients = _context.Clients.Count();
             var ventes = _context.Ventes.Count();
-            var total = _context.Ventes.Sum(v => v.Montant);
+
+            var total = _context.Ventes
+                .Select(v => (decimal?)v.Montant)
+                .Sum() ?? 0;
 
             return Ok(new
             {

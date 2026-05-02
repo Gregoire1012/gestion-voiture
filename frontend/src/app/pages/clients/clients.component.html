@@ -8,14 +8,26 @@
       <p>CRUD complet : Ajouter • Modifier • Supprimer</p>
     </div>
 
+    <!-- ALERTS -->
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="success">
+      {{ successMessage }}
+    </div>
+
     <!-- FORM -->
     <div class="form">
 
-      <!-- ❌ pas besoin ID en input (auto DB) -->
       <input [(ngModel)]="client.nom" placeholder="Nom">
       <input [(ngModel)]="client.prenom" placeholder="Prénom">
       <input [(ngModel)]="client.telephone" placeholder="Téléphone">
       <input [(ngModel)]="client.email" placeholder="Email">
+
+      <div *ngIf="formError" class="error">
+        ❌ Veuillez remplir tous les champs
+      </div>
 
       <button class="btn-primary" (click)="save()">
         {{ editMode ? '✏️ Modifier client' : '➕ Ajouter client' }}
@@ -30,7 +42,7 @@
     <!-- TABLE -->
     <div class="table-container">
 
-      <table>
+      <table *ngIf="clients.length > 0; else noData">
 
         <thead>
           <tr>
@@ -45,29 +57,20 @@
 
         <tbody>
 
-          <!-- IMPORTANT: idClient (Pas idclient) -->
           <tr *ngFor="let c of clients">
 
             <td>{{ c.idClient }}</td>
-
-            <td class="bold">{{ c.nom }}</td>
-
+            <td>{{ c.nom }}</td>
             <td>{{ c.prenom }}</td>
-
-            <td>
-              <span class="badge phone">{{ c.telephone }}</span>
-            </td>
-
-            <td class="email">{{ c.email }}</td>
+            <td>{{ c.telephone }}</td>
+            <td>{{ c.email }}</td>
 
             <td>
 
-              <button class="btn-edit" (click)="edit(c)">
-                ✏️
-              </button>
+              <button class="btn-edit" (click)="edit(c)">✏️</button>
 
-              <!-- IMPORTANT: delete by ID -->
-              <button class="btn-delete" (click)="delete(c.idClient)">
+              <!-- 🔥 UNE SEULE MÉTHODE -->
+              <button class="btn-delete" (click)="confirmDelete(c.idClient)">
                 🗑️
               </button>
 
@@ -78,6 +81,12 @@
         </tbody>
 
       </table>
+
+      <ng-template #noData>
+        <div class="empty">
+          ❌ Aucun client trouvé
+        </div>
+      </ng-template>
 
     </div>
 

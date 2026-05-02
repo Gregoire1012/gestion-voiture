@@ -14,6 +14,10 @@ export class ClientsComponent implements OnInit {
 
   clients: any[] = [];
   editMode = false;
+  formError = false;
+
+  errorMessage = '';
+  successMessage = '';
 
   client = {
     idClient: 0,
@@ -29,46 +33,92 @@ export class ClientsComponent implements OnInit {
     this.loadClients();
   }
 
-  // 🔥 LOAD
-  loadClients() {
+  // ================= LOAD =================
+  loadClients(): void {
     this.api.getClients().subscribe({
-      next: (data) => {
-        console.log("CLIENTS:", data);
-        this.clients = data;
+      next: (data: any) => {
+        this.clients = data?.$values ?? data ?? [];
+      },
+      error: () => {
+        this.clients = [];
+        this.errorMessage = "❌ Erreur chargement clients";
       }
     });
   }
 
-  // ➕ / ✏️ SAVE
-  save() {
+  // ================= SAVE =================
+  save(): void {
+
+    if (!this.client.nom || !this.client.prenom || !this.client.telephone || !this.client.email) {
+      this.formError = true;
+      this.errorMessage = "❌ Veuillez remplir tous les champs";
+      return;
+    }
+
+    this.formError = false;
+
     if (this.editMode) {
-      this.api.updateClient(this.client.idClient, this.client).subscribe(() => {
-        this.loadClients();
-        this.reset();
+
+      this.api.updateClient(this.client.idClient, this.client).subscribe({
+        next: () => {
+          this.successMessage = "✏️ Client modifié avec succès";
+          this.errorMessage = '';
+          this.loadClients();
+          this.reset();
+        },
+        error: () => {
+          this.errorMessage = "❌ Erreur modification";
+        }
       });
+
     } else {
-      this.api.addClient(this.client).subscribe(() => {
-        this.loadClients();
-        this.reset();
+
+      this.api.addClient(this.client).subscribe({
+        next: () => {
+          this.successMessage = "✅ Client ajouté avec succès";
+          this.errorMessage = '';
+          this.loadClients();
+          this.reset();
+        },
+        error: () => {
+          this.errorMessage = "❌ Erreur ajout";
+        }
       });
+
     }
   }
 
-  // ✏️ EDIT
-  edit(c: any) {
+  // ================= EDIT =================
+  edit(c: any): void {
     this.client = { ...c };
     this.editMode = true;
   }
 
-  // ❌ DELETE
-  delete(id: number) {
-    this.api.deleteClient(id).subscribe(() => {
-      this.loadClients();
+  // ================= DELETE (CORRIGÉ) =================
+  confirmDelete(id: number): void {
+
+    if (!id) {
+      this.errorMessage = "❌ ID invalide";
+      return;
+    }
+
+    const ok = confirm("⚠️ Voulez-vous vraiment supprimer ce client ?");
+    if (!ok) return;
+
+    this.api.deleteClient(id).subscribe({
+      next: () => {
+        this.successMessage = "🗑️ Client supprimé avec succès";
+        this.errorMessage = '';
+        this.loadClients();
+      },
+      error: () => {
+        this.errorMessage = "❌ Erreur suppression client";
+      }
     });
   }
 
-  // 🔄 RESET
-  reset() {
+  // ================= RESET =================
+  reset(): void {
     this.client = {
       idClient: 0,
       nom: '',
@@ -76,6 +126,8 @@ export class ClientsComponent implements OnInit {
       telephone: '',
       email: ''
     };
+
     this.editMode = false;
+    this.formError = false;
   }
 }

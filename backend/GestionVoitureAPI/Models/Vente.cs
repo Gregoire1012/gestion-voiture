@@ -13,9 +13,11 @@ namespace GestionVoitureAPI.Models
 
         // 🔥 FOREIGN KEYS
         public int IdClient { get; set; }
+
         public Client? Client { get; set; }
 
         public int IdVoiture { get; set; }
+
         public Voiture? Voiture { get; set; }
     }
 }

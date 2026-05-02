@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,16 +12,21 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  // 🚗 VOITURES
+  // ================= DASHBOARD =================
+  getDashboard(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/dashboard`);
+  }
+
+  // ================= VOITURES =================
   getVoitures(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/voitures`);
   }
 
-  addVoiture(data: any): Observable<any> {
+  addVoiture(data: FormData): Observable<any> {
     return this.http.post(`${this.baseUrl}/voitures`, data);
   }
 
-  updateVoiture(id: number, data: any): Observable<any> {
+  updateVoiture(id: number, data: FormData): Observable<any> {
     return this.http.put(`${this.baseUrl}/voitures/${id}`, data);
   }
 
@@ -28,7 +34,7 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}/voitures/${id}`);
   }
 
-  // 👤 CLIENTS
+  // ================= CLIENTS =================
   getClients(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/clients`);
   }
@@ -45,12 +51,16 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}/clients/${id}`);
   }
 
-  // 💰 VENTES
+  // ================= VENTES =================
   getVentes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/ventes`);
   }
 
   addVente(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/ventes`, data);
+  }
+
+  deleteVente(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/ventes/${id}`);
   }
 }

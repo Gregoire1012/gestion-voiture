@@ -1,3 +1,4 @@
+
 <div class="container">
 
   <h2>📊 Dashboard</h2>
@@ -6,17 +7,17 @@
 
     <div class="card blue">
       <h3>🚗 Voitures</h3>
-      <p>{{ voitures }}</p>
+      <p>{{ voituresCount }}</p>
     </div>
 
     <div class="card green">
       <h3>👤 Clients</h3>
-      <p>{{ clients }}</p>
+      <p>{{ clientsCount }}</p>
     </div>
 
     <div class="card orange">
       <h3>💰 Ventes</h3>
-      <p>{{ ventes }}</p>
+      <p>{{ ventesCount }}</p>
     </div>
 
     <div class="card red">
@@ -26,14 +27,15 @@
 
   </div>
 
-  <!-- 📊 GRAPH SIMPLE -->
+  <!-- GRAPH SIMPLE -->
   <div class="graph">
+
     <h3>📈 Statistiques</h3>
 
     <div class="bar-container">
-      <div class="bar voitures" [style.height.%]="voitures * 5"></div>
-      <div class="bar clients" [style.height.%]="clients * 5"></div>
-      <div class="bar ventes" [style.height.%]="ventes * 5"></div>
+      <div class="bar voitures" [style.height.%]="voituresCount * 10"></div>
+      <div class="bar clients" [style.height.%]="clientsCount * 10"></div>
+      <div class="bar ventes" [style.height.%]="ventesCount * 10"></div>
     </div>
 
     <div class="labels">

@@ -16,33 +16,95 @@ namespace GestionVoitureAPI.Controllers
             _context = context;
         }
 
-        // GET
+        // ================= GET ALL =================
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vente>>> Get()
         {
-            return await _context.Ventes.ToListAsync();
+            var ventes = await _context.Ventes
+                .Include(v => v.Client)   // 🔥 relation client
+                .Include(v => v.Voiture) // 🔥 relation voiture
+                .ToListAsync();
+
+            return Ok(ventes);
         }
 
-        // POST
-        [HttpPost]
-        public async Task<ActionResult<Vente>> Post(Vente vente)
+        // ================= GET BY ID =================
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Vente>> GetById(int id)
         {
-            _context.Ventes.Add(vente);
-            await _context.SaveChangesAsync();
+            var vente = await _context.Ventes
+                .Include(v => v.Client)
+                .Include(v => v.Voiture)
+                .FirstOrDefaultAsync(v => v.IdVente == id);
+
+            if (vente == null)
+                return NotFound();
+
             return Ok(vente);
         }
 
-        // DELETE
+        // ================= POST =================
+        [HttpPost]
+        public async Task<ActionResult<Vente>> Post([FromBody] Vente vente)
+        {
+            // 🔥 VALIDATION
+            if (vente == null)
+                return BadRequest("Données invalides");
+
+            if (vente.IdClient == 0 || vente.IdVoiture == 0)
+                return BadRequest("Client et Voiture sont obligatoires");
+
+            // 🔥 calcul automatique montant côté backend (sécurité)
+            var voiture = await _context.Voitures.FindAsync(vente.IdVoiture);
+            if (voiture == null)
+                return BadRequest("Voiture introuvable");
+
+            vente.Montant = voiture.Prix;
+
+            _context.Ventes.Add(vente);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetById), new { id = vente.IdVente }, vente);
+        }
+
+        // ================= PUT =================
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] Vente vente)
+        {
+            if (id != vente.IdVente)
+                return BadRequest("ID invalide");
+
+            var existing = await _context.Ventes.FindAsync(id);
+            if (existing == null)
+                return NotFound();
+
+            existing.Date_Vente = vente.Date_Vente;
+            existing.IdClient = vente.IdClient;
+            existing.IdVoiture = vente.IdVoiture;
+
+            // 🔥 recalcul montant
+            var voiture = await _context.Voitures.FindAsync(vente.IdVoiture);
+            if (voiture != null)
+                existing.Montant = voiture.Prix;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(existing);
+        }
+
+        // ================= DELETE =================
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var v = await _context.Ventes.FindAsync(id);
-            if (v == null) return NotFound();
+            var vente = await _context.Ventes.FindAsync(id);
 
-            _context.Ventes.Remove(v);
+            if (vente == null)
+                return NotFound("Vente non trouvée");
+
+            _context.Ventes.Remove(vente);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new { message = "Vente supprimée avec succès" });
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace GestionVoitureAPI.Models
 {
@@ -7,12 +8,21 @@ namespace GestionVoitureAPI.Models
         [Key]
         public int IdClient { get; set; }
 
-        public string Nom { get; set; } = "";
-        public string Prenom { get; set; } = "";
-        public string Telephone { get; set; } = "";
-        public string Email { get; set; } = "";
+        [Required(ErrorMessage = "Nom obligatoire")]
+        public string Nom { get; set; } = string.Empty;
 
-        // 🔥 relation (important pour ventes)
+        [Required(ErrorMessage = "Prénom obligatoire")]
+        public string Prenom { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Téléphone obligatoire")]
+        public string Telephone { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Email obligatoire")]
+        [EmailAddress(ErrorMessage = "Email invalide")]
+        public string Email { get; set; } = string.Empty;
+
+        // 🔥 relation avec Vente
+        [JsonIgnore] // ⚠️ évite boucle infinie JSON
         public List<Vente>? Ventes { get; set; }
     }
 }

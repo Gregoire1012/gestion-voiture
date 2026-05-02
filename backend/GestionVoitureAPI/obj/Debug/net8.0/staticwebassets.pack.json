@@ -1,0 +1,69 @@
+{
+  "Files": [
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/0116883d-ea80-4f9a-976e-7ffc324f9819.jpg",
+      "PackagePath": "staticwebassets/images/0116883d-ea80-4f9a-976e-7ffc324f9819.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/0cd04a4e-ed68-40af-8d79-f2ca5c5a447c.jpg",
+      "PackagePath": "staticwebassets/images/0cd04a4e-ed68-40af-8d79-f2ca5c5a447c.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/16a02509-2ac3-4ac5-b143-060e54e4de00.jpg",
+      "PackagePath": "staticwebassets/images/16a02509-2ac3-4ac5-b143-060e54e4de00.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/242e5084-e916-46bd-8bd8-45b9869b0928.jpg",
+      "PackagePath": "staticwebassets/images/242e5084-e916-46bd-8bd8-45b9869b0928.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/27825895-a83b-489a-b143-a91cb61b7269.png",
+      "PackagePath": "staticwebassets/images/27825895-a83b-489a-b143-a91cb61b7269.png"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/71ec3390-bd11-40ba-9c76-201b461e865b.jpg",
+      "PackagePath": "staticwebassets/images/71ec3390-bd11-40ba-9c76-201b461e865b.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/a9410fc6-f1ea-47ec-a510-9d932efa0c6f.jpg",
+      "PackagePath": "staticwebassets/images/a9410fc6-f1ea-47ec-a510-9d932efa0c6f.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/f43b1bb0-75cd-4066-8715-69ba36491bad.jpg",
+      "PackagePath": "staticwebassets/images/f43b1bb0-75cd-4066-8715-69ba36491bad.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/ff7f011a-2b45-4b8f-90cb-b38831f56c71.jpg",
+      "PackagePath": "staticwebassets/images/ff7f011a-2b45-4b8f-90cb-b38831f56c71.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/hyundai.jpg",
+      "PackagePath": "staticwebassets/images/hyundai.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/nissan.jpg",
+      "PackagePath": "staticwebassets/images/nissan.jpg"
+    },
+    {
+      "Id": "/home/gregoire/gestion-voiture/backend/GestionVoitureAPI/wwwroot/images/toyota.jpg",
+      "PackagePath": "staticwebassets/images/toyota.jpg"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.GestionVoitureAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.GestionVoitureAPI.props",
+      "PackagePath": "build\\GestionVoitureAPI.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.GestionVoitureAPI.props",
+      "PackagePath": "buildMultiTargeting\\GestionVoitureAPI.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.GestionVoitureAPI.props",
+      "PackagePath": "buildTransitive\\GestionVoitureAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
